@@ -4,7 +4,6 @@ import './App.css'
 type Step =
   | 'welcome'
   | 'eligibility'
-  | 'international'
   | 'account-status'
   | 'payment-method'
   | 'payment-terms'
@@ -139,92 +138,111 @@ function App() {
           />
         </div>
 
-        <div className="product-brand">
-          <div className="product-name">ReadySet</div>
-          <div className="product-subtitle">Before You Begin Your PRH Account Application</div>
+<div className="product-brand">
+  <div className="product-name">ReadySet</div>
+  <div className="product-subtitle">
+    Before You Begin Your PRH Account Application
+  </div>
+</div>
+
+<div className="header-spacer" aria-hidden="true" />
+</header>
+
+<main className="main-content">
+  {step === 'welcome' && (
+    <section
+      className="guide-card welcome-screen"
+      aria-labelledby="welcome-title"
+    >
+      <div className="screen-content">
+        <p className="eyebrow">Know What to Expect</p>
+        <h1 id="welcome-title">
+          Before You Begin Your PRH Account Application
+        </h1>
+        <p className="screen-intro">
+          This short guide will help you prepare.
+        </p>
+
+        <div
+          className="time-estimate"
+          aria-label="Estimated time: 2 to 3 minutes"
+        >
+          Estimated time: 2–3 minutes
         </div>
 
-        <div className="header-spacer" aria-hidden="true" />
-      </header>
+        <button
+          className="primary-button"
+          type="button"
+          onClick={() => setStep('account-status')}
+        >
+          Get Started
+          <span className="button-arrow" aria-hidden="true">
+            →
+          </span>
+        </button>
+      </div>
+    </section>
+  )}
 
-      <main className="main-content">
-        {step === 'welcome' && (
-          <section className="guide-card welcome-screen" aria-labelledby="welcome-title">
-            <div className="screen-content">
-              <p className="eyebrow">Know What to Expect</p>
-              <h1 id="welcome-title">Before You Begin Your PRH Account Application</h1>
-              <p className="screen-intro">This short guide will help you prepare.</p>
-              <div className="time-estimate" aria-label="Estimated time: 2 to 3 minutes">
-                Estimated time: 2–3 minutes
-              </div>
-              <button className="primary-button" type="button" onClick={() => setStep('eligibility')}>
-                Get Started <span className="button-arrow" aria-hidden="true">→</span>
-              </button>
-            </div>
-          </section>
-        )}
+  {step === 'account-status' && (
+    <section
+      className="guide-card"
+      aria-labelledby="account-status-title"
+    >
+      <ScreenMeta />PRH
 
-        {step === 'eligibility' && (
-          <section className="guide-card" aria-labelledby="eligibility-title">
-            <ScreenMeta />
-            <div className="screen-content">
-              <p className="eyebrow">U.S. Eligibility</p>
-              <h1 id="eligibility-title">Is the business located in the United States?</h1>
-              <p className="screen-intro">
-                ReadySet is designed for U.S.-based businesses. A U.S. freight forwarder or shipping address does not make the business U.S.-based.
-              </p>
-              <div className="choice-grid">
-                <ChoiceCard title="Yes" description="The business is located in the United States." onClick={() => setStep('account-status')} />
-                <ChoiceCard title="No" description="The business is located outside the United States, including Canada." onClick={() => setStep('international')} />
-              </div>
-              <button className="back-button" type="button" onClick={() => setStep('welcome')}>← Back</button>
-            </div>
-          </section>
-        )}
+      <div className="screen-content">
+        <p className="eyebrow">PRH Account Status</p>
 
-        {step === 'international' && (
-          <section className="guide-card" aria-labelledby="international-title">
-            <ScreenMeta />
-            <div className="screen-content">
-              <p className="eyebrow">A Different Onboarding Path</p>
-              <h1 id="international-title">ReadySet ends here for international businesses.</h1>
-              <p className="screen-intro">
-                If the business is located outside the United States, including Canada, contact PRH Customer Service for guidance on the appropriate onboarding process.
-              </p>
-              <div className="information-panel centered-panel">
-                <p className="information-label">PRH Customer Service</p>
-                <a className="contact-link" href="mailto:customerservice@penguinrandomhouse.com">customerservice@penguinrandomhouse.com</a>
-              </div>
-              <div className="action-row">
-                <button className="secondary-button" type="button" onClick={resetGuide}>Exit ReadySet</button>
-                <button className="back-button inline-back" type="button" onClick={() => setStep('eligibility')}>← Back</button>
-              </div>
-            </div>
-          </section>
-        )}
+        <h1 id="account-status-title">
+          Have you ordered from PRH or Compendium before?
+        </h1>
 
-        {step === 'account-status' && (
-          <section className="guide-card" aria-labelledby="account-status-title">
-            <ScreenMeta />
-            <div className="screen-content">
-              <p className="eyebrow">PRH Account Status</p>
-              <h1 id="account-status-title">Have you ordered from PRH or Compendium before?</h1>
-              <div className="status-copy">
-                <p>If you have only ordered from Compendium, you will need a PRH account before placing future orders.</p>
-                <p>If you have ordered directly from PRH, your account may still be active.</p>
-              </div>
-              <div className="information-panel centered-panel accent-panel">
-                <p className="information-label">Unsure whether your PRH account is active?</p>
-                <p>Contact PRH New Accounts before starting a new application. You do not need to know your account number.</p>
-                <a className="contact-link" href="tel:+18667616685">1-866-761-6685</a>
-              </div>
-              <button className="primary-button" type="button" onClick={() => setStep('payment-method')}>
-                Continue <span className="button-arrow" aria-hidden="true">→</span>
-              </button>
-              <button className="back-button" type="button" onClick={() => setStep('eligibility')}>← Back</button>
-            </div>
-          </section>
-        )}
+        <div className="status-copy">
+          <p>
+            If you have only ordered from Compendium, you will need a PRH
+            account before placing future orders.
+          </p>
+          <p>
+            If you have ordered directly from PRH, your account may still be
+            active.
+          </p>
+        </div>
+
+        <div className="information-panel centered-panel accent-panel">
+          <p className="information-label">
+            Unsure whether your PRH account is active?
+          </p>
+          <p>
+            Contact PRH New Accounts before starting a new application. You do
+            not need to know your account number.
+          </p>
+          <a className="contact-link" href="tel:+18667616685">
+            1-866-761-6685
+          </a>
+        </div>
+
+        <button
+          className="primary-button"
+          type="button"
+          onClick={() => setStep('payment-method')}
+        >
+          Continue
+          <span className="button-arrow" aria-hidden="true">
+            →
+          </span>
+        </button>
+
+        <button
+          className="back-button"
+          type="button"
+          onClick={() => setStep('welcome')}
+        >
+          ← Back
+        </button>
+      </div>
+    </section>
+  )}
 
         {step === 'payment-method' && (
           <section className="guide-card" aria-labelledby="payment-method-title">
@@ -383,107 +401,156 @@ function App() {
         )}
 
         {step === 'readiness-summary' && (
-          <section className="guide-card summary-card" aria-labelledby="readiness-summary-title">
-            <ScreenMeta />
+  <section className="guide-card summary-card" aria-labelledby="readiness-summary-title">
+    <ScreenMeta />
 
-            <div className="summary-heading">
-              <div className="summary-icon-wrap"><ClipboardIcon /></div>
-              <div>
-                <h1 id="readiness-summary-title">Your Readiness Summary</h1>
-                <p>
-                  Here is a summary of what you selected and what to keep in mind
-                  as you complete your PRH account application.
-                </p>
-              </div>
-            </div>
+    <div className="summary-heading">
+      <div className="summary-icon-wrap">
+        <ClipboardIcon />
+      </div>
 
-            <div className="summary-layout">
-              <section className="summary-panel summary-selection-panel">
-                <h2>Your Selection</h2>
-                <div className="summary-rule" />
-                <h3>{paymentMethod === 'terms' ? 'Payment Terms (Net 60)' : 'Credit Card (Prepay)'}</h3>
+      <div>
+        <h1 id="readiness-summary-title">Your Readiness Summary</h1>
+        <p>Everything you need before beginning your PRH New Account Application.</p>
+      </div>
+    </div>
 
-                {paymentMethod === 'terms' ? (
-                  <>
-                    <p>Before you apply, gather the following:</p>
+    <div className="summary-layout">
+      <section className="summary-panel summary-selection-panel">
+        <h2>Your Selection</h2>
+        <div className="summary-rule" />
 
-                    <h4>Bank information</h4>
-                    <ul>
-                      <li>Bank name and address</li>
-                      <li>Bank contact name</li>
-                      <li>Phone number</li>
-                      <li>Email address</li>
-                    </ul>
+        <h3>
+          {paymentMethod === 'terms'
+            ? 'Payment Terms (Net 60)'
+            : 'Credit Card (Prepay)'}
+        </h3>
 
-                    <h4>Three trade references</h4>
-                    <ul>
-                      <li>Company name and contact name</li>
-                      <li>Account number</li>
-                      <li>Phone number</li>
-                      <li>Email address</li>
-                    </ul>
-                  </>
-                ) : (
-                  <p>Pay by credit card for each order.</p>
-                )}
-              </section>
+        {paymentMethod === 'terms' ? (
+          <>
+            <p>Before you apply, gather the following:</p>
 
-              <div className="summary-side">
-                <section className="summary-panel">
-                  <h2>Important Reminders</h2>
-                  <div className="summary-rule" />
-                  <ul className="summary-reminders">
-                    <li>
-                      Use your <strong>Legal Business Name</strong> consistently.
-                      Make sure it matches your tax documentation.
-                    </li>
-                    <li>New account approval typically takes 3–5 business days.</li>
-                    <li>Keep your supporting information nearby as you complete the application.</li>
-                  </ul>
-                </section>
+            <h4>Bank information</h4>
+            <ul>
+              <li>Bank name and address</li>
+              <li>Bank contact name</li>
+              <li>Phone number</li>
+              <li>Email address</li>
+            </ul>
 
-                <section className="summary-panel">
-                  <h2>What&apos;s Next</h2>
-                  <div className="summary-rule" />
-                  <ol className="next-steps">
-                    <li>Complete your PRH account application.</li>
-                    <li>Watch for updates from PRH New Accounts.</li>
-                    <li>
-                      As a final step, submit your tax documentation.
-                      <span>
-                        Orders can still ship right away. Applicable sales tax will be
-                        refunded when documentation is received within 90 days and approved.
-                      </span>
-                    </li>
-                  </ol>
-                </section>
-              </div>
-            </div>
-
-            <div className="summary-actions">
-              <button className="primary-button" type="button" onClick={copyReadinessSummary}>
-                {copyStatus}
-              </button>
-            </div>
-
-            <div className="all-set-box">
-              <div className="all-set-check" aria-hidden="true">✓</div>
-              <div>
-                <h2>All set!</h2>
-                <p>
-                  You have taken the right steps to prepare. When you are ready,
-                  complete your PRH account application.
-                </p>
-                <strong>
-                  Thank you for partnering with Compendium and Penguin Random House.
-                </strong>
-              </div>
-              <button className="primary-button done-button" type="button" onClick={() => setStep('complete')}>
-                Done
-              </button>
-            </div>
-          </section>
+            <h4>Three trade references</h4>
+            <ul>
+              <li>Company name and contact name</li>
+              <li>Account number</li>
+              <li>Phone number</li>
+              <li>Email address</li>
+            </ul>
+          </>
+        ) : (
+          <p>Pay by credit card for each order.</p>
         )}
+      </section>
+
+      <section className="summary-panel">
+        <h2>Important Reminders</h2>
+        <div className="summary-rule" />
+
+        <ul className="summary-reminders">
+          <li>
+            Use your <strong>Legal Business Name</strong> consistently.
+            Make sure it matches your tax documentation.
+          </li>
+          <li>New account approval typically takes 3–5 business days.</li>
+          <li>
+            Keep your supporting information nearby as you complete the application.
+          </li>
+        </ul>
+      </section>
+
+      <section className="summary-panel whats-next-panel">
+        <h2>What&apos;s Next</h2>
+        <div className="summary-rule" />
+
+        <ol className="next-steps">
+          <li>Complete your PRH account application.</li>
+
+          <li>Watch for updates from PRH New Accounts.</li>
+
+          <li>
+            As a final step, submit your tax documentation.
+            <span>
+              Orders can still ship right away. Applicable sales tax will be
+              refunded when documentation is received within 90 days and approved.
+            </span>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <div className="ready-to-apply-box">
+      <div className="ready-to-apply-copy">
+        <div className="all-set-check" aria-hidden="true">
+          ✓
+        </div>
+
+        <div>
+          <h2>Ready to Apply?</h2>
+          <p>
+            You&apos;re prepared to begin the Penguin Random House New Account Application.
+          </p>
+        </div>
+      </div>
+
+      <div className="ready-to-apply-actions">
+        <a
+          className="primary-button application-link"
+          href="https://app-newaccts-prd.azurewebsites.net/new-accounts-intro"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Begin Your PRH New Account Application
+          <span className="button-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+
+        <button
+          className="secondary-button copy-summary-button"
+          type="button"
+          onClick={copyReadinessSummary}
+        >
+          {copyStatus}
+        </button>
+      </div>
+    </div>
+
+    <div className="all-set-box">
+      <div className="all-set-check" aria-hidden="true">
+        ✓
+      </div>
+
+      <div>
+        <h2>All set!</h2>
+        <p>
+          You have taken the right steps to prepare. When you are ready,
+          complete your PRH account application.
+        </p>
+
+        <strong>
+          Thank you for partnering with Compendium and Penguin Random House.
+        </strong>
+      </div>
+
+      <button
+        className="primary-button done-button"
+        type="button"
+        onClick={() => setStep('complete')}
+      >
+        Done
+      </button>
+    </div>
+  </section>
+)}
 
         {step === 'complete' && (
           <section className="guide-card completion-card" aria-labelledby="complete-title">
