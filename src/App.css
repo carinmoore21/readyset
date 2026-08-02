@@ -728,7 +728,7 @@ font-size: clamp(30px, 3.5vw, 40px);
   .done-button {
     width: 100%;
   }
-}
+
 /* Actions */
 
 .primary-button,
