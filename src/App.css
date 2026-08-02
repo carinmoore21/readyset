@@ -703,7 +703,6 @@ font-size: clamp(30px, 3.5vw, 40px);
   .whats-next-panel {
     grid-column: auto;
   }
-}
   .next-steps {
     grid-template-columns: 1fr;
     gap: 14px;
@@ -727,6 +726,7 @@ font-size: clamp(30px, 3.5vw, 40px);
 
   .done-button {
     width: 100%;
+  }
   }
 
 /* Actions */
