@@ -468,6 +468,7 @@ font-size: clamp(30px, 3.5vw, 40px);
 }
 
 .summary-layout {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
@@ -475,6 +476,8 @@ font-size: clamp(30px, 3.5vw, 40px);
 }
 
 .summary-panel {
+  width: 100%;
+  margin: 0;
   padding: 22px 24px;
   background: rgba(255, 255, 255, 0.74);
   border: 1px solid rgba(147, 138, 127, 0.24);
@@ -562,32 +565,31 @@ font-size: clamp(30px, 3.5vw, 40px);
 .next-steps {
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: 0.9fr 0.9fr 1.2fr;
+  gap: 0;
   list-style: none;
   counter-reset: next-step;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
 }
 
 .next-steps li {
   position: relative;
-  min-height: 84px;
-  padding: 0 22px 0 48px;
+  min-height: 92px;
+  padding: 0 26px 0 48px;
   color: var(--text-primary);
   font-weight: 700;
   border-right: 1px solid rgba(194, 187, 178, 0.55);
 }
 
 .next-steps li:last-child {
+  padding-right: 0;
   border-right: 0;
 }
 
 .next-steps li::before {
-  counter-increment: next-step;
-  content: counter(next-step);
   position: absolute;
-  left: 0;
   top: -2px;
+  left: 0;
   width: 30px;
   height: 30px;
   display: grid;
@@ -596,11 +598,13 @@ font-size: clamp(30px, 3.5vw, 40px);
   border: 1.5px solid var(--compendium-orange);
   border-radius: 50%;
   font-weight: 800;
+  content: counter(next-step);
+  counter-increment: next-step;
 }
 
 .next-steps li span {
   display: block;
-  margin-top: 5px;
+  margin-top: 6px;
   color: var(--text-secondary);
   font-weight: 400;
 }
@@ -623,6 +627,10 @@ font-size: clamp(30px, 3.5vw, 40px);
   gap: 18px;
 }
 
+.ready-to-apply-text {
+  min-width: 0;
+}
+
 .ready-to-apply-copy h2 {
   margin: 0 0 5px;
   font-family: Georgia, "Times New Roman", serif;
@@ -636,6 +644,12 @@ font-size: clamp(30px, 3.5vw, 40px);
   line-height: 1.4;
 }
 
+.summary-back-button,
+.ready-to-apply-copy .back-button {
+  margin-top: 12px;
+  margin-left: -8px;
+}
+
 .ready-to-apply-actions {
   display: grid;
   gap: 10px;
@@ -646,6 +660,10 @@ font-size: clamp(30px, 3.5vw, 40px);
   width: 100%;
   justify-content: center;
   text-align: center;
+}
+
+.copy-summary-button {
+  margin-top: 0;
 }
 
 .all-set-box {
@@ -703,6 +721,7 @@ font-size: clamp(30px, 3.5vw, 40px);
   .whats-next-panel {
     grid-column: auto;
   }
+
   .next-steps {
     grid-template-columns: 1fr;
     gap: 14px;
@@ -724,10 +743,16 @@ font-size: clamp(30px, 3.5vw, 40px);
     justify-content: center;
   }
 
+  .ready-to-apply-actions {
+    width: 100%;
+  }
+
+  .application-link,
+  .copy-summary-button,
   .done-button {
     width: 100%;
   }
-  }
+}
 
 /* Actions */
 

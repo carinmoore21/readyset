@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-
+import { jsPDF } from 'jspdf'
 type Step =
   | 'welcome'
   | 'eligibility'
@@ -50,7 +50,7 @@ function ClipboardIcon() {
 function App() {
   const [step, setStep] = useState<Step>('welcome')
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null)
-  const [copyStatus, setCopyStatus] = useState('Copy My Readiness Summary')
+  const [copyStatus, setCopyStatus] = useState('Download My Readiness Summary (PDF)')
 
   const progress: Partial<Record<Step, string>> = {
     eligibility: 'Step 1 of 8',
@@ -65,56 +65,233 @@ function App() {
     'readiness-summary': 'Readiness Summary',
   }
 
-  const readinessSummary = [
-    'READYSET READINESS SUMMARY',
-    '',
-    'YOUR SELECTION',
-    paymentMethod === 'terms' ? 'Payment Terms (Net 60 EOM)' : 'Credit Card (Prepay)',
-    '',
-    ...(paymentMethod === 'terms'
-      ? [
-          'Before you apply, gather the following:',
-          '',
-          'Bank information:',
-          '- Bank name and address',
-          '- Bank contact name',
-          '- Phone number',
-          '- Email address',
-          '',
-          'Three trade references:',
-          '- Company name and contact name',
-          '- Account number',
-          '- Phone number',
-          '- Email address',
-          '',
-        ]
-      : ['Pay by credit card for each order.', '']),
-    'IMPORTANT REMINDERS',
-    '- Use your Legal Business Name consistently and make sure it matches your tax documentation.',
-    '- New account approval typically takes 3–5 business days.',
-    '- Keep your supporting information nearby as you complete the application.',
-    '',
-    "WHAT'S NEXT",
-    '1. Complete your PRH account application.',
-    '2. Watch for updates from PRH New Accounts.',
-    '3. As a final step, submit your tax documentation.',
-    '   Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
-  ].join('\n')
 
-  async function copyReadinessSummary() {
+  function copyReadinessSummary() {
+    const applicationUrl =
+      'https://app-newaccts-prd.azurewebsites.net/new-accounts-intro'
+
+    setCopyStatus('Preparing PDF...')
+
     try {
-      await navigator.clipboard.writeText(readinessSummary)
-      setCopyStatus('Copied')
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'letter',
+      })
+
+      const pageWidth = doc.internal.pageSize.getWidth()
+      const pageHeight = doc.internal.pageSize.getHeight()
+      const margin = 54
+      const contentWidth = pageWidth - margin * 2
+      let y = 54
+
+      const ensureSpace = (neededHeight: number) => {
+        if (y + neededHeight > pageHeight - margin) {
+          doc.addPage()
+          y = margin
+        }
+      }
+
+      const addWrappedText = (
+        value: string,
+        options: {
+          fontSize?: number
+          bold?: boolean
+          color?: [number, number, number]
+          indent?: number
+          spaceAfter?: number
+          lineHeight?: number
+        } = {},
+      ) => {
+        const {
+          fontSize = 10.5,
+          bold = false,
+          color = [70, 66, 62],
+          indent = 0,
+          spaceAfter = 9,
+          lineHeight = 14,
+        } = options
+
+        doc.setFont('helvetica', bold ? 'bold' : 'normal')
+        doc.setFontSize(fontSize)
+        doc.setTextColor(...color)
+
+        const lines = doc.splitTextToSize(value, contentWidth - indent)
+        ensureSpace(lines.length * lineHeight + spaceAfter)
+        doc.text(lines, margin + indent, y)
+        y += lines.length * lineHeight + spaceAfter
+      }
+
+      const addSectionHeading = (value: string) => {
+        ensureSpace(30)
+        y += 5
+        addWrappedText(value, {
+          fontSize: 15,
+          bold: true,
+          color: [38, 35, 33],
+          spaceAfter: 8,
+          lineHeight: 18,
+        })
+      }
+
+      const addBullet = (value: string) => {
+        addWrappedText(`• ${value}`, {
+          indent: 12,
+          spaceAfter: 3,
+          lineHeight: 13,
+        })
+      }
+
+      doc.setTextColor(255, 132, 78)
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(27)
+      doc.text('ReadySet', margin, y)
+      y += 22
+
+      doc.setTextColor(82, 77, 72)
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(10)
+      doc.text('Before You Begin Your PRH Account Application', margin, y)
+      y += 32
+
+      doc.setDrawColor(255, 132, 78)
+      doc.setLineWidth(1)
+      doc.line(margin, y, pageWidth - margin, y)
+      y += 28
+
+      addWrappedText('Your Readiness Summary', {
+        fontSize: 22,
+        bold: true,
+        color: [38, 35, 33],
+        spaceAfter: 7,
+        lineHeight: 25,
+      })
+
+      addWrappedText(
+        'Everything you need before beginning your PRH New Account Application.',
+        {
+          fontSize: 11,
+          spaceAfter: 18,
+          lineHeight: 15,
+        },
+      )
+
+      addSectionHeading('Your Selection')
+
+      addWrappedText(
+        paymentMethod === 'terms'
+          ? 'Payment Terms (Net 60 EOM)'
+          : 'Credit Card (Prepay)',
+        {
+          fontSize: 13,
+          bold: true,
+          color: [255, 132, 78],
+          spaceAfter: 8,
+          lineHeight: 16,
+        },
+      )
+
+      if (paymentMethod === 'terms') {
+        addWrappedText('Before you apply, gather the following:', {
+          spaceAfter: 8,
+        })
+
+        addWrappedText('Bank information', {
+          bold: true,
+          color: [38, 35, 33],
+          spaceAfter: 5,
+        })
+
+        addBullet('Bank name and address')
+        addBullet('Bank contact name')
+        addBullet('Phone number')
+        addBullet('Email address')
+
+        addWrappedText('Three trade references', {
+          bold: true,
+          color: [38, 35, 33],
+          spaceAfter: 5,
+        })
+
+        addBullet('Company name and contact name')
+        addBullet('Account number')
+        addBullet('Phone number')
+        addBullet('Email address')
+      } else {
+        addWrappedText('Pay by credit card for each order.')
+      }
+
+      addSectionHeading('Important Reminders')
+
+      addBullet(
+        'Use your Legal Business Name consistently. Make sure it matches your tax documentation.',
+      )
+      addBullet('New account approval typically takes 3–5 business days.')
+      addBullet(
+        'Keep your supporting information nearby as you complete the application.',
+      )
+
+      addSectionHeading("What's Next")
+
+      addBullet('1. Complete your PRH account application.')
+      addBullet('2. Watch for updates from PRH New Accounts.')
+      addBullet(
+        '3. As a final step, submit your tax documentation. Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
+      )
+
+      ensureSpace(72)
+      y += 12
+
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(13)
+      doc.setTextColor(255, 132, 78)
+      doc.textWithLink(
+        'Begin Your PRH New Account Application',
+        margin,
+        y,
+        { url: applicationUrl },
+      )
+
+      y += 18
+
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(9)
+      doc.setTextColor(82, 77, 72)
+      doc.text(applicationUrl, margin, y)
+
+      y += 28
+
+      doc.setDrawColor(205, 198, 190)
+      doc.line(margin, y, pageWidth - margin, y)
+      y += 17
+
+      addWrappedText(
+        'ReadySet is for preparation only. It does not replace the official PRH account application.',
+        {
+          fontSize: 8.5,
+          color: [100, 95, 90],
+          spaceAfter: 0,
+          lineHeight: 11,
+        },
+      )
+
+      doc.save('ReadySet-Readiness-Summary.pdf')
+
+      window.setTimeout(() => {
+        setCopyStatus('Download My Readiness Summary (PDF)')
+      }, 1200)
     } catch {
-      setCopyStatus('Copy failed')
+      setCopyStatus('PDF download failed')
+      window.setTimeout(() => {
+        setCopyStatus('Download My Readiness Summary (PDF)')
+      }, 1800)
     }
-    window.setTimeout(() => setCopyStatus('Copy My Readiness Summary'), 1800)
   }
 
   function resetGuide() {
     setStep('welcome')
     setPaymentMethod(null)
-    setCopyStatus('Copy My Readiness Summary')
+    setCopyStatus('Download My Readiness Summary (PDF)')
   }
 
   function ScreenMeta() {
