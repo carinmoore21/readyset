@@ -148,11 +148,7 @@ function App() {
       doc.text('ReadySet', margin, y)
       y += 22
 
-      doc.setTextColor(82, 77, 72)
-      doc.setFont('helvetica', 'normal')
-      doc.setFontSize(10)
-      doc.text('Before You Begin Your PRH Account Application', margin, y)
-      y += 32
+      y += 10
 
       doc.setDrawColor(255, 132, 78)
       doc.setLineWidth(1)
@@ -233,11 +229,26 @@ function App() {
 
       addSectionHeading("What's Next")
 
-      addBullet('1. Complete your PRH account application.')
-      addBullet('2. Watch for updates from PRH New Accounts.')
-      addBullet(
-        '3. As a final step, submit your tax documentation. Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
-      )
+      addWrappedText('1. Complete your PRH account application.', {
+  indent: 12,
+  spaceAfter: 3,
+  lineHeight: 13,
+})
+
+addWrappedText('2. Watch for updates from PRH New Accounts.', {
+  indent: 12,
+  spaceAfter: 3,
+  lineHeight: 13,
+})
+
+addWrappedText(
+  '3. As a final step, submit your tax documentation. Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
+  {
+    indent: 12,
+    spaceAfter: 3,
+    lineHeight: 13,
+  },
+)
 
       ensureSpace(72)
       y += 12
