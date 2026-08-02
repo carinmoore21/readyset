@@ -69,7 +69,7 @@ function App() {
     'READYSET READINESS SUMMARY',
     '',
     'YOUR SELECTION',
-    paymentMethod === 'terms' ? 'Payment Terms (Net 60)' : 'Credit Card (Prepay)',
+    paymentMethod === 'terms' ? 'Payment Terms (Net 60 EOM)' : 'Credit Card (Prepay)',
     '',
     ...(paymentMethod === 'terms'
       ? [
@@ -133,7 +133,7 @@ function App() {
         <div className="brand-lockup">
           <img
             className="brand-lockup-image"
-            src="/compendium-logo.png"
+            src={`${import.meta.env.BASE_URL}compendium-logo.png`}
             alt="Compendium and Penguin Random House"
           />
         </div>
@@ -422,7 +422,7 @@ function App() {
 
         <h3>
           {paymentMethod === 'terms'
-            ? 'Payment Terms (Net 60)'
+            ? 'Payment Terms (Net 60 EOM)'
             : 'Credit Card (Prepay)'}
         </h3>
 
