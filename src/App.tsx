@@ -494,11 +494,19 @@ function App() {
         </div>
 
         <div>
-          <h2>Ready to Apply?</h2>
-          <p>
-            You&apos;re prepared to begin the Penguin Random House New Account Application.
-          </p>
-        </div>
+  <h2>Ready to Apply?</h2>
+  <p>
+    You&apos;re prepared to begin the Penguin Random House New Account Application.
+  </p>
+
+  <button
+    className="back-button"
+    type="button"
+    onClick={() => setStep('tax-documentation')}
+  >
+    ← Back
+  </button>
+</div>
       </div>
 
       <div className="ready-to-apply-actions">

@@ -420,7 +420,7 @@ font-size: clamp(30px, 3.5vw, 40px);
 .summary-card {
   display: block;
   min-height: auto;
-  padding-top: 58px;
+  padding-top: 42px;
 }
 
 .summary-heading {
@@ -440,10 +440,11 @@ font-size: clamp(30px, 3.5vw, 40px);
 
 .summary-heading p {
   max-width: 660px;
-  margin: 10px 0 0;
-  color: var(--text-secondary);
-  font-size: 17px;
-  line-height: 1.5;
+  margin: 8px 0 0;
+  color: var(--text-primary);
+  opacity: 0.88;
+  font-size: 18px;
+  line-height: 1.45;
 }
 
 .summary-icon-wrap {
@@ -555,6 +556,7 @@ font-size: clamp(30px, 3.5vw, 40px);
 
 .whats-next-panel {
   grid-column: 1 / -1;
+  width: 100%;
 }
 
 .next-steps {
@@ -701,7 +703,7 @@ font-size: clamp(30px, 3.5vw, 40px);
   .whats-next-panel {
     grid-column: auto;
   }
-
+}
   .next-steps {
     grid-template-columns: 1fr;
     gap: 14px;
