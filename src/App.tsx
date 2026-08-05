@@ -326,8 +326,10 @@ addWrappedText(
 
 <div className="product-brand">
   <div className="product-name">ReadySet</div>
-  <div className="product-subtitle">
-  Before You Begin Your Penguin Random House Application
+<div className="product-subtitle">
+  Before You Begin Your
+  <br />
+  Penguin Random House Account Application
 </div>
 </div>
 
