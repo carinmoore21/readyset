@@ -50,7 +50,7 @@ function ClipboardIcon() {
 function App() {
   const [step, setStep] = useState<Step>('welcome')
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null)
-  const [copyStatus, setCopyStatus] = useState('Download My Readiness Summary (PDF)')
+  const [copyStatus, setCopyStatus] = useState('Download My Account Application Checklist (PDF)')
 
   const progress: Partial<Record<Step, string>> = {
     eligibility: 'Step 1 of 8',
@@ -62,8 +62,7 @@ function App() {
     'application-review': 'Step 6 of 8',
     'watch-email': 'Step 7 of 8',
     'tax-documentation': 'Step 8 of 8',
-    'readiness-summary': 'Readiness Summary',
-  }
+      }
 
 
   function copyReadinessSummary() {
@@ -155,7 +154,7 @@ function App() {
       doc.line(margin, y, pageWidth - margin, y)
       y += 28
 
-      addWrappedText('Your Readiness Summary', {
+      addWrappedText('Account Application Checklist', {
         fontSize: 22,
         bold: true,
         color: [38, 35, 33],
@@ -164,7 +163,7 @@ function App() {
       })
 
       addWrappedText(
-        'Everything you need before beginning your PRH New Account Application.',
+        'Everything you need before beginning your Penguin Random House Account Application.',
         {
           fontSize: 11,
           spaceAfter: 18,
@@ -242,7 +241,7 @@ addWrappedText('2. Watch for updates from PRH New Accounts.', {
 })
 
 addWrappedText(
-  '3. As a final step, submit your tax documentation. Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
+  '3. As a final step, submit your tax-exempt purchasing documentation. Orders can still ship right away. Applicable sales tax will be refunded when documentation is received within 90 days and approved.',
   {
     indent: 12,
     spaceAfter: 3,
@@ -289,12 +288,12 @@ addWrappedText(
       doc.save('ReadySet-Readiness-Summary.pdf')
 
       window.setTimeout(() => {
-        setCopyStatus('Download My Readiness Summary (PDF)')
+        setCopyStatus('Download My Account Application Checklist (PDF)')
       }, 1200)
     } catch {
       setCopyStatus('PDF download failed')
       window.setTimeout(() => {
-        setCopyStatus('Download My Readiness Summary (PDF)')
+        setCopyStatus('Download My Account Application Checklist (PDF)')
       }, 1800)
     }
   }
@@ -302,7 +301,7 @@ addWrappedText(
   function resetGuide() {
     setStep('welcome')
     setPaymentMethod(null)
-    setCopyStatus('Download My Readiness Summary (PDF)')
+    setCopyStatus('Download My Account Application Checklist (PDF)')
   }
 
   function ScreenMeta() {
@@ -329,8 +328,8 @@ addWrappedText(
 <div className="product-brand">
   <div className="product-name">ReadySet</div>
   <div className="product-subtitle">
-    Before You Begin Your PRH Account Application
-  </div>
+  Before You Begin Your Penguin Random House Application
+</div>
 </div>
 
 <div className="header-spacer" aria-hidden="true" />
@@ -345,7 +344,7 @@ addWrappedText(
       <div className="screen-content">
         <p className="eyebrow">Know What to Expect</p>
         <h1 id="welcome-title">
-          Before You Begin Your PRH Account Application
+          Before You Begin Your Penguin Random House Application
         </h1>
         <p className="screen-intro">
           This short guide will help you prepare.
@@ -377,7 +376,7 @@ addWrappedText(
       className="guide-card"
       aria-labelledby="account-status-title"
     >
-      <ScreenMeta />PRH
+      <ScreenMeta />
 
       <div className="screen-content">
         <p className="eyebrow">PRH Account Status</p>
@@ -571,7 +570,7 @@ addWrappedText(
             <ScreenMeta />
             <div className="screen-content">
               <p className="eyebrow">Tax Documentation</p>
-              <h1 id="tax-documentation-title">Tax documents can be submitted after the application.</h1>
+              <h1 id="tax-documentation-title">Tax-exempt purchasing documents can be submitted after the application.</h1>
               <p className="screen-intro">Orders do not need to wait for tax documentation before they can ship.</p>
               <div className="information-panel">
                 <ul className="check-list">
@@ -598,8 +597,8 @@ addWrappedText(
       </div>
 
       <div>
-        <h1 id="readiness-summary-title">Your Readiness Summary</h1>
-        <p>Everything you need before beginning your PRH New Account Application.</p>
+        <h1 id="readiness-summary-title">Account Application Checklist</h1>
+        <p>Everything you need before beginning your Penguin Random House New Account Application.</p>
       </div>
     </div>
 
@@ -665,7 +664,7 @@ addWrappedText(
           <li>Watch for updates from PRH New Accounts.</li>
 
           <li>
-            As a final step, submit your tax documentation.
+            As a final step, submit your tax-exempt purchasing documentation.
             <span>
               Orders can still ship right away. Applicable sales tax will be
               refunded when documentation is received within 90 days and approved.
@@ -683,10 +682,7 @@ addWrappedText(
 
         <div>
   <h2>Ready to Apply?</h2>
-  <p>
-    You&apos;re prepared to begin the Penguin Random House New Account Application.
-  </p>
-
+ 
   <button
     className="back-button"
     type="button"
@@ -726,15 +722,11 @@ addWrappedText(
       </div>
 
       <div>
-        <h2>All set!</h2>
-        <p>
-          You have taken the right steps to prepare. When you are ready,
-          complete your PRH account application.
-        </p>
-
-        <strong>
-          Thank you for partnering with Compendium and Penguin Random House.
-        </strong>
+               
+       <strong>
+  Thank you for partnering with Compendium and Penguin Random House.
+  We look forward to working with you.
+</strong>
       </div>
 
       <button
