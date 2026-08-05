@@ -227,13 +227,13 @@ function App() {
 
       addSectionHeading("What's Next")
 
-      addWrappedText('1. Complete your PRH account application.', {
+      addWrappedText('1. Complete your Penguin Random House account application.', {
   indent: 12,
   spaceAfter: 3,
   lineHeight: 13,
 })
 
-addWrappedText('2. Watch for updates from PRH New Accounts.', {
+addWrappedText('2. Watch for updates from Penguin Random House New Accounts.', {
   indent: 12,
   spaceAfter: 3,
   lineHeight: 13,
@@ -255,7 +255,7 @@ addWrappedText(
       doc.setFontSize(13)
       doc.setTextColor(255, 132, 78)
       doc.textWithLink(
-        'Begin Your PRH New Account Application',
+        'Begin Your Penguin Random House New Account Application',
         margin,
         y,
         { url: applicationUrl },
@@ -275,7 +275,7 @@ addWrappedText(
       y += 17
 
       addWrappedText(
-        'ReadySet is for preparation only. It does not replace the official PRH account application.',
+        'ReadySet is for preparation only. It does not replace the official Penguin Random House account application.',
         {
           fontSize: 8.5,
           color: [100, 95, 90],
@@ -380,29 +380,29 @@ addWrappedText(
       <ScreenMeta />
 
       <div className="screen-content">
-        <p className="eyebrow">PRH Account Status</p>
+        <p className="eyebrow">Penguin Random House Account Status</p>
 
         <h1 id="account-status-title">
-          Have you ordered from PRH or Compendium before?
+          Have you ordered from Penguin Random House or Compendium before?
         </h1>
 
         <div className="status-copy">
           <p>
-            If you have only ordered from Compendium, you will need a PRH
+            If you have only ordered from Compendium, you will need a Penguin Random House
             account before placing future orders.
           </p>
           <p>
-            If you have ordered directly from PRH, your account may still be
+            If you have ordered directly from Penguin Random House, your account may still be
             active.
           </p>
         </div>
 
         <div className="information-panel centered-panel accent-panel">
           <p className="information-label">
-            Unsure whether your PRH account is active?
+            Unsure whether your Penguin Random House account is active?
           </p>
           <p>
-            Contact PRH New Accounts before starting a new application. You do
+            Contact Penguin Random House New Accounts before starting a new application. You do
             not need to know your account number.
           </p>
           <a className="contact-link" href="tel:+18667616685">
@@ -513,7 +513,7 @@ addWrappedText(
                 The application explains both Returnable and Non-returnable purchasing options before asking you to make your selection.
               </p>
               <div className="information-panel centered-panel accent-panel">
-                <p className="information-label">Questions? Contact the PRH New Accounts team.</p>
+                <p className="information-label">Questions? Contact the Penguin Random House New Accounts team.</p>
                 <a className="contact-link" href="tel:+18667616685">1-866-761-6685</a>
               </div>
               <button className="primary-button" type="button" onClick={() => setStep('application-review')}>
@@ -530,7 +530,7 @@ addWrappedText(
             <div className="screen-content">
               <p className="eyebrow">Application Review</p>
               <h1 id="application-review-title">Submission does not mean immediate approval.</h1>
-              <p className="screen-intro">The PRH New Accounts team reviews the application before the account is established.</p>
+              <p className="screen-intro">The Penguin Random House New Accounts team reviews the application before the account is established.</p>
               <div className="information-panel">
                 <ul className="check-list">
                   <li>Additional information may be requested during the review.</li>
@@ -551,7 +551,7 @@ addWrappedText(
             <div className="screen-content">
               <p className="eyebrow">Watch Your Email</p>
               <h1 id="watch-email-title">Keep an eye on your inbox after you apply.</h1>
-              <p className="screen-intro">PRH New Accounts communicates by email when additional information is needed and when the account has been approved.</p>
+              <p className="screen-intro">Penguin Random House New Accounts communicates by email when additional information is needed and when the account has been approved.</p>
               <div className="information-panel">
                 <ul className="check-list">
                   <li>Check the primary contact email regularly, including spam or junk folders.</li>
@@ -660,9 +660,9 @@ addWrappedText(
         <div className="summary-rule" />
 
         <ol className="next-steps">
-          <li>Complete your PRH account application.</li>
+          <li>Complete your Penguin Random House account application.</li>
 
-          <li>Watch for updates from PRH New Accounts.</li>
+          <li>Watch for updates from Penguin Random House New Accounts.</li>
 
           <li>
             As a final step, submit your tax-exempt purchasing documentation.
@@ -701,7 +701,7 @@ addWrappedText(
           target="_blank"
           rel="noreferrer"
         >
-          Begin Your PRH New Account Application
+          Begin Your Penguin Random House New Account Application
           <span className="button-arrow" aria-hidden="true">
             ↗
           </span>
@@ -747,7 +747,7 @@ addWrappedText(
               <p className="eyebrow">ReadySet Complete</p>
               <h1 id="complete-title">You are ready to begin!</h1>
               <p className="screen-intro">
-                Keep your readiness summary nearby as you complete the PRH account application.
+                Keep your readiness summary nearby as you complete the Penguin Random House account application.
               </p>
               <button className="secondary-button" type="button" onClick={resetGuide}>
                 Return to the beginning
@@ -759,7 +759,7 @@ addWrappedText(
 
       <footer className="site-footer">
         <span className="footer-lock" aria-hidden="true" />
-        <span>ReadySet is for preparation only. It does not replace the official PRH account application.</span>
+        <span>ReadySet is for preparation only. It does not replace the official Penguin Random House account application.</span>
       </footer>
     </div>
   )
