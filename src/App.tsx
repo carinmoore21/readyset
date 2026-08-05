@@ -56,8 +56,7 @@ function App() {
     eligibility: 'Step 1 of 8',
     'account-status': 'Step 2 of 8',
     'payment-method': 'Step 3 of 8',
-    'payment-terms': 'Payment Terms preparation',
-    'business-identity': 'Step 4 of 8',
+        'business-identity': 'Step 4 of 8',
     returnability: 'Step 5 of 8',
     'application-review': 'Step 6 of 8',
     'watch-email': 'Step 7 of 8',
@@ -580,7 +579,7 @@ addWrappedText(
                 </ul>
               </div>
               <button className="primary-button" type="button" onClick={() => setStep('readiness-summary')}>
-                View My Readiness Summary <span className="button-arrow" aria-hidden="true">→</span>
+                View My Account Application Checklist <span className="button-arrow" aria-hidden="true">→</span>
               </button>
               <button className="back-button" type="button" onClick={() => setStep('watch-email')}>← Back</button>
             </div>
@@ -732,7 +731,7 @@ addWrappedText(
       <button
         className="primary-button done-button"
         type="button"
-        onClick={() => setStep('complete')}
+        onClick={resetGuide}
       >
         Done
       </button>
